@@ -23,23 +23,23 @@
 <meta property="og:site_name" content="王嘉浩的blog">
 <meta property="og:description" content="参考线：reference line 决策规划总体概览(已有导航路径，决策规划流程)  定位+导航：生成参考线 静态障碍物投影到以参考线为坐标轴的frenet坐标轴上 决策算法对障碍物做决策（往左绕，往右绕，忽略）,开辟最优凸空间 规划算法在凸空间中搜索出最优的路径 后处理，在规划轨迹中选取一个点，坐标转换成Cartesian，输出给控制去跟踪  参考线参考线是解决方案，解决导航路径过长，不平滑的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240405092603705-1716974523139-6.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240405093102300.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240405093701578.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240405141613878.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240405173124418.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240405233336252.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240405233810840.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240405235016854.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240405235345495.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240406000309848.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240406122706205.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405092603705-1716974523139-6.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405093102300.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405093701578.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405141613878.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405173124418.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405233336252.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405233810840.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405235016854.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405235345495.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240406000309848.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240406122706205.png">
 <meta property="article:published_time" content="2024-05-29T05:39:25.274Z">
-<meta property="article:modified_time" content="2024-05-29T10:00:47.961Z">
+<meta property="article:modified_time" content="2024-05-29T10:22:34.995Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Apollo">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wjhln.github.io/.io//image-20240405092603705-1716974523139-6.png">
+<meta name="twitter:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405092603705-1716974523139-6.png">
   
   
   
@@ -305,18 +305,18 @@
 <li>不平滑</li>
 </ol>
 <p>解决方案：截取一小段轨迹做平滑，将平滑后的轨迹作为参考线</p>
-<p><img src="/.io//image-20240405092603705-1716974523139-6.png" srcset="/img/loading.gif" lazyload alt="image-20240405092603705-1716974523139-6"></p>
+<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405092603705-1716974523139-6.png" srcset="/img/loading.gif" lazyload alt="image-20240405092603705-1716974523139-6"></p>
 <p>每个规划周期内，找到车在导航路径中的投影点，以投影点为坐标原点，往后取30米，往前取150米范围内的点，做平滑，平滑后的点的集合成为参考线。</p>
 <h2 id="参考线平滑算法"><a href="#参考线平滑算法" class="headerlink" title="参考线平滑算法"></a>参考线平滑算法</h2><p><strong>平滑性因素</strong></p>
-<p><img src="/.io//image-20240405093102300.png" srcset="/img/loading.gif" lazyload alt="image-20240405093102300"></p>
+<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405093102300.png" srcset="/img/loading.gif" lazyload alt="image-20240405093102300"></p>
 <p>$|\overrightarrow{P_{1}P_{3}}|$：衡量平滑与不平滑的标准，$|\overrightarrow{P_{1}P_{3}}|$越小越平滑。缺点：虽然平滑了，但是几何形状差距大。</p>
 <p><strong>道路几何因素</strong></p>
-<p><img src="/.io//image-20240405093701578.png" srcset="/img/loading.gif" lazyload alt="image-20240405093701578"></p>
+<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405093701578.png" srcset="/img/loading.gif" lazyload alt="image-20240405093701578"></p>
 <p>$|\overrightarrow{P_{1}P_{1r}}|+|\overrightarrow{P_{2}P_{2r}}|+|\overrightarrow{P_{3}P_{3r}}|$越小，越接近原几何路径。</p>
 <p><strong>长度要尽可能均匀和紧凑</strong></p>
-<p><img src="/.io//image-20240405141613878.png" srcset="/img/loading.gif" lazyload alt="image-20240405141613878"></p>
+<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405141613878.png" srcset="/img/loading.gif" lazyload alt="image-20240405141613878"></p>
 <p>$|\overrightarrow{P_{1}P_{2}}|^2+|\overrightarrow{P_{1}P_{3}}|^2$越小，越均匀，紧凑。</p>
-<h3 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h3><p><img src="/.io//image-20240405173124418.png" srcset="/img/loading.gif" lazyload alt="image-20240405173124418"></p>
+<h3 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h3><p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405173124418.png" srcset="/img/loading.gif" lazyload alt="image-20240405173124418"></p>
 <p>已知：$x_{1r}…x_{3r},y_{1r}…y_{3r}$</p>
 <p>未知：$x_{1}…x_{3},y_{1}…y_{3}$</p>
 <p>代价函数：</p>
@@ -361,10 +361,10 @@
 </ol>
 <h3 id="找匹配点"><a href="#找匹配点" class="headerlink" title="找匹配点"></a>找匹配点</h3><p><strong>普通算法：</strong>每一个规划周期计算一遍，太慢，导航路径很可能很长，遍历费时</p>
 <p><strong>改进算法：</strong></p>
-<p><img src="/.io//image-20240405233336252.png" srcset="/img/loading.gif" lazyload alt="image-20240405233336252"></p>
+<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405233336252.png" srcset="/img/loading.gif" lazyload alt="image-20240405233336252"></p>
 <p>以上个周期的 match point 为起点做遍历，一旦有$l_{i+1}&gt;l_i$，立刻退出遍历，$l_i$对应的点作为本周期的匹配点</p>
 <p><strong>找匹配点的方向：</strong></p>
-<p><img src="/.io//image-20240405233810840.png" srcset="/img/loading.gif" lazyload alt="image-20240405233810840"></p>
+<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405233810840.png" srcset="/img/loading.gif" lazyload alt="image-20240405233810840"></p>
 <p>如果车往前，就往前遍历，如果车往后，就往后遍历：</p>
 <p>​	$\overrightarrow{d} \cdot \overrightarrow{\tau}&gt;0$：向前遍历</p>
 <p>​	$\overrightarrow{d} \cdot \overrightarrow{\tau}&lt;0$：向后遍历</p>
@@ -373,10 +373,10 @@
 <p>本质有点像梯度下降</p>
 </blockquote>
 <p>此方法可以大大加速找匹配点的算法，但只适用于在上个匹配点结果附近只有一个极小值点。</p>
-<p><img src="/.io//image-20240405235016854.png" srcset="/img/loading.gif" lazyload alt="image-20240405235016854"></p>
+<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405235016854.png" srcset="/img/loading.gif" lazyload alt="image-20240405235016854"></p>
 <p>但是这种问题一般情况下不会出现，因为规划周期是100ms，即使以50m&#x2F;s的速度运动，车也只走了5m，5m内道路不太可能出现这么扭曲的几何，一般在上个规划周期的匹配点上只有一个极值点。</p>
 <p>万一真的出现这种情况：</p>
-<p><img src="/.io//image-20240405235345495.png" srcset="/img/loading.gif" lazyload alt="image-20240405235345495"></p>
+<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405235345495.png" srcset="/img/loading.gif" lazyload alt="image-20240405235345495"></p>
 <p>使用 increase_count 变量记录$l$增加的次数</p>
 <p>if	 $l_{i+1}&lt;l_i$	($l$在减小)</p>
 <p>​	increase_count &#x3D; 0</p>
@@ -386,13 +386,13 @@
 <p>​	increase_count++</p>
 <p>if	increase_count &gt; 10	(意味着检查了10个点都没发现另外的极小值点)</p>
 <p>​	break</p>
-<p><img src="/.io//image-20240406000309848.png" srcset="/img/loading.gif" lazyload alt="image-20240406000309848"></p>
+<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240406000309848.png" srcset="/img/loading.gif" lazyload alt="image-20240406000309848"></p>
 <p>第一次运行判断increase_count大于50个点，不是第一次运行则判断大于3个点</p>
 <p><strong>处理点不够的情况：</strong></p>
 <p>如果后面没有30m或者前面没有150m</p>
 <p>解决办法：保持总长度不变(30+150)，(10+170)，(80+100)</p>
 <p><strong>轨迹拼接：</strong></p>
-<p><img src="/.io//image-20240406122706205.png" srcset="/img/loading.gif" lazyload alt="image-20240406122706205"></p>
+<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240406122706205.png" srcset="/img/loading.gif" lazyload alt="image-20240406122706205"></p>
 <p>每100ms周期平滑的轨迹优大量重复的点，我们只需要将上一个规划周期和多出来的平滑轨迹拼接起来就可以</p>
 <p>具体做法，将本周期和上个周期的参考线作比较，如果一模一样就用上个周期的平滑轨迹。若不一样，计算需要拼接多少个点记为n，</p>
 <p>Fem Smoother 至少需要3个点才能够使用</p>

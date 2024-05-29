@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="王嘉浩的blog">
 <meta property="og:description" content="Apollo 控制算法采用 PID + LQR 算法，大多数选择MPC， 但是MPC的计算量太大 默认已经有一条路径规划 控制 油门&#x2F;刹车:arrow_right:力:arrow_right:加速度:arrow_right:速度:arrow_right:位置 方向盘:arrow_right:前轮转角:arrow_right:横向位移and航向角  三个坐标系 绝对坐标系，大地坐标系(X-">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240404235128726.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240405084822954.png">
-<meta property="og:image" content="https://wjhln.github.io/.io//image-20240408111206138.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E6%8E%A7%E5%88%B6%EF%BC%9A%E4%B8%89%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%96%B9%E7%A8%8B/image-20240404235128726.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E6%8E%A7%E5%88%B6%EF%BC%9A%E4%B8%89%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%96%B9%E7%A8%8B/image-20240405084822954.png">
+<meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E6%8E%A7%E5%88%B6%EF%BC%9A%E4%B8%89%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%96%B9%E7%A8%8B/image-20240408111206138.png">
 <meta property="article:published_time" content="2024-05-29T05:39:29.158Z">
 <meta property="article:modified_time" content="2024-05-29T08:52:44.134Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wjhln.github.io/.io//image-20240404235128726.png">
+<meta name="twitter:image" content="https://wjhln.github.io/2024/05/29/%E6%8E%A7%E5%88%B6%EF%BC%9A%E4%B8%89%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%96%B9%E7%A8%8B/image-20240404235128726.png">
   
   
   
@@ -296,7 +296,7 @@
 </blockquote>
 <p>一般对车进行建模分析的时候都看成自行车模型，把四个轮子变成两个轮子，认为车是完全的左右对称的，并且左右轮距相对于轨迹来说可以忽略不计。进行简化</p>
 <h3 id="速度计算"><a href="#速度计算" class="headerlink" title="速度计算"></a>速度计算</h3><p>用理论力学的<font color="red">顺心法</font></p>
-<p><img src="/.io//image-20240404235128726.png" srcset="/img/loading.gif" lazyload alt="image-20240404235128726"></p>
+<p><img src="/2024/05/29/%E6%8E%A7%E5%88%B6%EF%BC%9A%E4%B8%89%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%96%B9%E7%A8%8B/image-20240404235128726.png" srcset="/img/loading.gif" lazyload alt="image-20240404235128726"></p>
 <p>垂线的方向就是质心速度的方向，车的质心速度方向一般和车的轴线方向一般不会重合，车的轴线方向和大地坐标系的 X 方向一般也不是重合的。所以要定义两个角度</p>
 <p>$\phi$ 横摆角:车的轴线与$\overrightarrow{X}$方向的夹角，<em>绝对坐标系下</em></p>
 <p>$\beta$质心侧偏角：质心速度与$\overrightarrow{x}$方向的夹角，<em>车身坐标系下</em></p>
@@ -305,13 +305,13 @@
 <blockquote>
 <p>三个假设：左右对称，轮距可以忽略不计，车的轮子是个刚性的轮子</p>
 </blockquote>
-<h3 id="模型建立"><a href="#模型建立" class="headerlink" title="模型建立"></a>模型建立</h3><p><img src="/.io//image-20240405084822954.png" srcset="/img/loading.gif" lazyload alt="image-20240405084822954"></p>
+<h3 id="模型建立"><a href="#模型建立" class="headerlink" title="模型建立"></a>模型建立</h3><p><img src="/2024/05/29/%E6%8E%A7%E5%88%B6%EF%BC%9A%E4%B8%89%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%96%B9%E7%A8%8B/image-20240405084822954.png" srcset="/img/loading.gif" lazyload alt="image-20240405084822954"></p>
 <p>$v_{x}$：纵向车速，$a_x$：纵向加速度。</p>
 <p>$v_y$：侧向车速，$a_y$：侧向加速度。</p>
 <p>建立微分方程组：</p>
 <p>​	几何关系：运动学模型</p>
 <p>​	牛顿力学：动力学模型</p>
-<h4 id="运动学模型"><a href="#运动学模型" class="headerlink" title="运动学模型"></a>运动学模型</h4><p><img src="/.io//image-20240408111206138.png" srcset="/img/loading.gif" lazyload alt="image-20240408111206138"></p>
+<h4 id="运动学模型"><a href="#运动学模型" class="headerlink" title="运动学模型"></a>运动学模型</h4><p><img src="/2024/05/29/%E6%8E%A7%E5%88%B6%EF%BC%9A%E4%B8%89%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%96%B9%E7%A8%8B/image-20240408111206138.png" srcset="/img/loading.gif" lazyload alt="image-20240408111206138"></p>
 <p>$$\dot{X}&#x3D;v\cos(\beta+\phi)$$</p>
 <p>$$\dot{Y}&#x3D;v\sin(\beta+\phi)$$</p>
 <p>$$\dot{\phi}&#x3D;\dfrac{v}{R}$$</p>
@@ -397,12 +397,6 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
-                    
-                      <a href="/2024/05/29/data/" title="data">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">data</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
                     
                   </article>
                   <article class="post-next col-6">
