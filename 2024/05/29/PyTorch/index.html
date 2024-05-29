@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Pytorch 安装  线性模型  DataSet Model Training Inferring    过拟合：学习的时候 把噪声也学习进来了。   泛化能力：可以正确识别在测试集中没有的数据。    通常是得不到测试集的结果，所以为了防止深度学习过程中的过拟合以及增加模型的泛化能力，需要再次将训练集分为训练集和开发集，但训练集训练完成后，需要放到开发集中进行测试，如果满足要求，再把开发集合">
+    <meta name="description" content="Pytorch 安装线性模型 DataSet Model Training Inferring   过拟合：学习的时候 把噪声也学习进来了。  泛化能力：可以正确识别在测试集中没有的数据。    通常是得不到测试集的结果，所以为了防止深度学习过程中的过拟合以及增加模型的泛化能力，需要再次将训练集分为训练集和开发集，但训练集训练完成后，需要放到开发集中进行测试，如果满足要求，再把开发集合并到训练集中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pytorch 安装">
 <meta property="og:url" content="https://wjhln.github.io/2024/05/29/PyTorch/index.html">
 <meta property="og:site_name" content="王嘉浩的blog">
-<meta property="og:description" content="Pytorch 安装  线性模型  DataSet Model Training Inferring    过拟合：学习的时候 把噪声也学习进来了。   泛化能力：可以正确识别在测试集中没有的数据。    通常是得不到测试集的结果，所以为了防止深度学习过程中的过拟合以及增加模型的泛化能力，需要再次将训练集分为训练集和开发集，但训练集训练完成后，需要放到开发集中进行测试，如果满足要求，再把开发集合">
+<meta property="og:description" content="Pytorch 安装线性模型 DataSet Model Training Inferring   过拟合：学习的时候 把噪声也学习进来了。  泛化能力：可以正确识别在测试集中没有的数据。    通常是得不到测试集的结果，所以为了防止深度学习过程中的过拟合以及增加模型的泛化能力，需要再次将训练集分为训练集和开发集，但训练集训练完成后，需要放到开发集中进行测试，如果满足要求，再把开发集合并到训练集中">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wjhln.github.io/.io//Project/%E6%96%87%E6%A1%A3/%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PyTorch.assets/image-20240521214147487.png">
 <meta property="article:published_time" content="2024-05-28T16:18:59.990Z">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          961 字
         
       </span>
     
@@ -278,98 +278,73 @@
             
               <div class="markdown-body">
                 
-                <h1 id="pytorch-安装"><a class="markdownIt-Anchor" href="#pytorch-安装"></a> Pytorch 安装</h1>
-<h1 id="线性模型"><a class="markdownIt-Anchor" href="#线性模型"></a> 线性模型</h1>
-<ol>
+                <h1 id="Pytorch-安装"><a href="#Pytorch-安装" class="headerlink" title="Pytorch 安装"></a>Pytorch 安装</h1><h1 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h1><ol>
 <li>DataSet</li>
 <li>Model</li>
 <li>Training</li>
 <li>Inferring</li>
 </ol>
 <ul>
-<li>
-<p>过拟合：学习的时候 把噪声也学习进来了。</p>
+<li><p>过拟合：学习的时候 把噪声也学习进来了。</p>
 </li>
-<li>
-<p>泛化能力：可以正确识别在测试集中没有的数据。</p>
+<li><p>泛化能力：可以正确识别在测试集中没有的数据。</p>
 </li>
 </ul>
 <blockquote>
 <p>通常是得不到测试集的结果，所以为了防止深度学习过程中的过拟合以及增加模型的泛化能力，需要再次将训练集分为训练集和开发集，但训练集训练完成后，需要放到开发集中进行测试，如果满足要求，再把开发集合并到训练集中，再进行训练。</p>
 </blockquote>
 <ul>
-<li>
-<p>损失模型（loss）:在机器学习中评估的方式</p>
+<li><p>损失模型（loss）:在机器学习中评估的方式</p>
 </li>
-<li>
-<p>平均平方误差（MSE）：</p>
+<li><p>平均平方误差（MSE）：</p>
 </li>
 </ul>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>=</mo><mfrac><mn>1</mn><mi>N</mi></mfrac><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><mrow><mo stretchy="false">(</mo><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>n</mi></msub><mo>−</mo><msub><mi>y</mi><mi>n</mi></msub><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mrow><annotation encoding="application/x-tex">cost=\frac{1}{N}\sum_{n=1}^{N}{(\hat{y}_n-y_n)^2}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">o</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0954490000000003em;vertical-align:-1.267113em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283360000000002em;"><span style="top:-1.882887em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.267113em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen">(</span><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;"><span class="mord">^</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
-<h1 id="梯度下降法"><a class="markdownIt-Anchor" href="#梯度下降法"></a> 梯度下降法</h1>
-<p><strong>梯度下降法（Gradient Descent）:</strong></p>
+<p>$$<br>cost&#x3D;\frac{1}{N}\sum_{n&#x3D;1}^{N}{(\hat{y}_n-y_n)^2}<br>$$</p>
+<h1 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h1><p><strong>梯度下降法（Gradient Descent）:</strong></p>
 <img src="/.io//Project\文档\笔记\深度学习\PyTorch.assets\image-20240521214147487.png" srcset="/img/loading.gif" lazyload alt="image-20240521214147487" style="zoom: 25%;">
 $$
 Gradient = \frac{\part{cost}}{\part{w}}
 $$
 倒数的负方向就是$cost$减小的方向：
-<p>核心算法：</p>
-<p class="katex-block katex-error" title="ParseError: KaTeX parse error: Undefined control sequence: \part at position 27: …ga-\alpha\frac{\̲p̲a̲r̲t̲{cost}}{\part{w…">\omega=\omega-\alpha\frac{\part{cost}}{\part{w}}
-</p>
+
+<p>核心算法：<br>$$<br>\omega&#x3D;\omega-\alpha\frac{\part{cost}}{\part{w}}<br>$$</p>
 <ul>
-<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span>为学习率</li>
+<li>$\alpha$为学习率</li>
 </ul>
 <blockquote>
 <p>梯度下降法体现了贪心的思想，只找当前最好的选择，如果遇到非凸函数，只能找到局部最优解。</p>
 </blockquote>
-<p>需要说明的是，在神经网络中很难陷入到局部最优点，但是遇到<strong>鞍点</strong>后，梯度计算结果为0，会导致<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span>无法增加。</p>
+<p>需要说明的是，在神经网络中很难陷入到局部最优点，但是遇到<strong>鞍点</strong>后，梯度计算结果为0，会导致$\omega$无法增加。</p>
 <blockquote>
-<p>如果发现<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">cost</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">o</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span></span></span></span>发散，证明训练失败，最有可能的原因是因为学习率<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span>太大。</p>
+<p>如果发现$cost$发散，证明训练失败，最有可能的原因是因为学习率$\alpha$太大。</p>
 </blockquote>
-<p><strong>随机梯度下降法：</strong></p>
-<p class="katex-block katex-error" title="ParseError: KaTeX parse error: Undefined control sequence: \part at position 18: …adient = \frac{\̲p̲a̲r̲t̲{loss}}{\part{w…">Gradient = \frac{\part{loss}}{\part{w}}
-</p>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">cost</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">o</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span></span></span></span>为所有样本的损失函数，当遇到鞍点时可能会陷住无法推进，将所有样本的损失换成单个样本的损失，利用单个样本的随机噪声可能会推动继续前进。</p>
+<p><strong>随机梯度下降法：</strong><br>$$<br>Gradient &#x3D; \frac{\part{loss}}{\part{w}}<br>$$<br>$cost$为所有样本的损失函数，当遇到鞍点时可能会陷住无法推进，将所有样本的损失换成单个样本的损失，利用单个样本的随机噪声可能会推动继续前进。</p>
 <blockquote>
-<p>如果利用随机梯度下降法，下一个样本<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span>的计算是需要上一个样本的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span>值，就不能并行计算，而梯度下降法则可以实现并行计算。</p>
+<p>如果利用随机梯度下降法，下一个样本$\omega$的计算是需要上一个样本的$\omega$值，就不能并行计算，而梯度下降法则可以实现并行计算。</p>
 </blockquote>
 <p><strong>批量随机梯度下降法</strong></p>
 <p>作为梯度下降法和随机梯度下降法的折中办法，批量随机梯度下降法将多个样本进行分组，在每个组内进行随机梯度下架法。</p>
-<h1 id="反向传播"><a class="markdownIt-Anchor" href="#反向传播"></a> 反向传播</h1>
-<h1 id="张量-tensor"><a class="markdownIt-Anchor" href="#张量-tensor"></a> 张量 Tensor</h1>
-<p>Tensor是PyTorch里面最基本的数据类型，可以是标量，向量，矩阵，甚至是高维的Tensor，与Numpy中的多维数组非常类似。Tensor还提供了GPU计算和自动求梯度等很多功能，使得Tensor更加适合深度学习。</p>
+<h1 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h1><h1 id="张量-Tensor"><a href="#张量-Tensor" class="headerlink" title="张量 Tensor"></a>张量 Tensor</h1><p>Tensor是PyTorch里面最基本的数据类型，可以是标量，向量，矩阵，甚至是高维的Tensor，与Numpy中的多维数组非常类似。Tensor还提供了GPU计算和自动求梯度等很多功能，使得Tensor更加适合深度学习。</p>
 <p>Tensor是一个类，里面有两个非常重要的成员，<code>data</code>和<code>grad</code>：</p>
 <ul>
-<li>data中存放的是权重<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span>​</li>
-<li>grad中存放的是损失函数对于<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span>的导数：<span class="katex-error" title="ParseError: KaTeX parse error: Undefined control sequence: \part at position 21: …laystyle{\frac{\̲p̲a̲r̲t̲{loss}}{\part{\…">\displaystyle{\frac{\part{loss}}{\part{\omega}}}</span>​</li>
+<li>data中存放的是权重$\omega$​</li>
+<li>grad中存放的是损失函数对于$\omega$的导数：$\displaystyle{\frac{\part{loss}}{\part{\omega}}}$​</li>
 </ul>
-<h1 id="分类问题"><a class="markdownIt-Anchor" href="#分类问题"></a> 分类问题</h1>
-<p>输出值应该为概率，计算输入值属于输出值每一个分类的概率，所有分类的概率值相加应该等于1，然后将概率值进行排序，去概率最大的那个为最终结果。</p>
+<h1 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h1><p>输出值应该为概率，计算输入值属于输出值每一个分类的概率，所有分类的概率值相加应该等于1，然后将概率值进行排序，去概率最大的那个为最终结果。</p>
 <p>与分类任务不同的是，回归任务是预测一个或者多个连续变量，回归任务的核心是通过学习输入变量和输出变量之间的关系来预测未来的输出值。</p>
 <p>回归任务的特点是：</p>
 <ol>
 <li>目标变量是连续的，回归任务的输出变量可以取任意实数值。</li>
 <li>回归任务存在损失函数，用来衡量预测值与实际值之间的差距。</li>
 </ol>
-<h2 id="sigmoid-函数"><a class="markdownIt-Anchor" href="#sigmoid-函数"></a> Sigmoid 函数</h2>
-<p>通过<code>sigmoid</code>函数可以将输出值对应到0~1的范围内。</p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><msup><mi>e</mi><mrow><mo>−</mo><mi>x</mi></mrow></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">y=\frac{1}{1+e^{-x}}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.09077em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.697331em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>在论文中Sigmoid函数一般简写为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sigma(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></p>
-<h2 id="交叉熵"><a class="markdownIt-Anchor" href="#交叉熵"></a> 交叉熵</h2>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>l</mi><mi>o</mi><mi>s</mi><mi>s</mi><mo>=</mo><mo>−</mo><mo stretchy="false">(</mo><mi>y</mi><mi>log</mi><mo>⁡</mo><mover accent="true"><mi>y</mi><mo>^</mo></mover><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>y</mi><mo stretchy="false">)</mo><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mover accent="true"><mi>y</mi><mo>^</mo></mover><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">loss=-(y\log \hat{y}+(1-y)log(1-\hat{y}))
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal">s</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;"><span class="mord">^</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;"><span class="mord">^</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></span></p>
-<h2 id="加载数据集"><a class="markdownIt-Anchor" href="#加载数据集"></a> 加载数据集</h2>
-<ul>
-<li>
-<p>Epoch：所有样本参与一次训练指的是Epoch</p>
+<h2 id="Sigmoid-函数"><a href="#Sigmoid-函数" class="headerlink" title="Sigmoid 函数"></a>Sigmoid 函数</h2><p>通过<code>sigmoid</code>函数可以将输出值对应到0~1的范围内。<br>$$<br>y&#x3D;\frac{1}{1+e^{-x}}<br>$$<br>在论文中Sigmoid函数一般简写为$\sigma(x)$</p>
+<h2 id="交叉熵"><a href="#交叉熵" class="headerlink" title="交叉熵"></a>交叉熵</h2><p>$$<br>loss&#x3D;-(y\log \hat{y}+(1-y)log(1-\hat{y}))<br>$$</p>
+<h2 id="加载数据集"><a href="#加载数据集" class="headerlink" title="加载数据集"></a>加载数据集</h2><ul>
+<li><p>Epoch：所有样本参与一次训练指的是Epoch</p>
 </li>
-<li>
-<p>Batch-Size：一次训练时所用的样本数量</p>
+<li><p>Batch-Size：一次训练时所用的样本数量</p>
 </li>
-<li>
-<p>Iteration：所有样本所分成的份数，即所有样本数除以Batch-Size数</p>
+<li><p>Iteration：所有样本所分成的份数，即所有样本数除以Batch-Size数</p>
 </li>
 </ul>
 
