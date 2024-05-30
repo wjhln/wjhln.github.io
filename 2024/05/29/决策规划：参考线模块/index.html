@@ -7,21 +7,23 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="参考线：reference line 决策规划总体概览(已有导航路径，决策规划流程)  定位+导航：生成参考线 静态障碍物投影到以参考线为坐标轴的frenet坐标轴上 决策算法对障碍物做决策（往左绕，往右绕，忽略）,开辟最优凸空间 规划算法在凸空间中搜索出最优的路径 后处理，在规划轨迹中选取一个点，坐标转换成Cartesian，输出给控制去跟踪  参考线参考线是解决方案，解决导航路径过长，不平滑的">
+    <meta name="description" content="决策规划总体概览(已有导航路径，决策规划流程)  定位+导航：生成参考线 静态障碍物投影到以参考线为坐标轴的frenet坐标轴上 决策算法对障碍物做决策（往左绕，往右绕，忽略）,开辟最优凸空间 规划算法在凸空间中搜索出最优的路径 后处理，在规划轨迹中选取一个点，坐标转换成Cartesian，输出给控制去跟踪  参考线 参考线是解决方案，解决导航路径过长，不平滑的问题  过长的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="决策规划：参考线模块">
 <meta property="og:url" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/index.html">
 <meta property="og:site_name" content="王嘉浩的blog">
-<meta property="og:description" content="参考线：reference line 决策规划总体概览(已有导航路径，决策规划流程)  定位+导航：生成参考线 静态障碍物投影到以参考线为坐标轴的frenet坐标轴上 决策算法对障碍物做决策（往左绕，往右绕，忽略）,开辟最优凸空间 规划算法在凸空间中搜索出最优的路径 后处理，在规划轨迹中选取一个点，坐标转换成Cartesian，输出给控制去跟踪  参考线参考线是解决方案，解决导航路径过长，不平滑的">
+<meta property="og:description" content="决策规划总体概览(已有导航路径，决策规划流程)  定位+导航：生成参考线 静态障碍物投影到以参考线为坐标轴的frenet坐标轴上 决策算法对障碍物做决策（往左绕，往右绕，忽略）,开辟最优凸空间 规划算法在凸空间中搜索出最优的路径 后处理，在规划轨迹中选取一个点，坐标转换成Cartesian，输出给控制去跟踪  参考线 参考线是解决方案，解决导航路径过长，不平滑的问题  过长的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405092603705-1716974523139-6.png">
 <meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405093102300.png">
@@ -35,7 +37,7 @@
 <meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240406000309848.png">
 <meta property="og:image" content="https://wjhln.github.io/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240406122706205.png">
 <meta property="article:published_time" content="2024-05-29T05:39:25.274Z">
-<meta property="article:modified_time" content="2024-05-29T10:22:34.995Z">
+<meta property="article:modified_time" content="2024-05-29T11:10:32.601Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Apollo">
 <meta name="twitter:card" content="summary_large_image">
@@ -94,11 +96,7 @@
 
 
   
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 
 
 <body>
@@ -111,7 +109,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>锅包youの博客</strong>
+      <strong>叫王同学の博客</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -207,7 +205,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/banner_img.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/banner_img.jpg%E5%8F%82%E8%80%83%E7%BA%BF%EF%BC%9Areference%20line') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -289,110 +287,162 @@
             
               <div class="markdown-body">
                 
-                <p>参考线：reference line</p>
-<p>决策规划总体概览(已有导航路径，决策规划流程)</p>
-<ol>
+                <p>决策规划总体概览(已有导航路径，决策规划流程)</p>
+<ol type="1">
 <li>定位+导航：生成参考线</li>
 <li>静态障碍物投影到以参考线为坐标轴的frenet坐标轴上</li>
 <li>决策算法对障碍物做决策（往左绕，往右绕，忽略）,开辟最优凸空间</li>
 <li>规划算法在凸空间中搜索出最优的路径</li>
 <li>后处理，在规划轨迹中选取一个点，坐标转换成Cartesian，输出给控制去跟踪</li>
 </ol>
-<h1 id="参考线"><a href="#参考线" class="headerlink" title="参考线"></a>参考线</h1><p>参考线是解决方案，解决导航路径过长，不平滑的问题</p>
-<ol>
+<h1 id="参考线">参考线</h1>
+<p>参考线是解决方案，解决导航路径过长，不平滑的问题</p>
+<ol type="1">
 <li>过长的路径不利于坐标转换</li>
 <li>过长的路径，障碍物投影可能不唯一</li>
 <li>不平滑</li>
 </ol>
 <p>解决方案：截取一小段轨迹做平滑，将平滑后的轨迹作为参考线</p>
-<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405092603705-1716974523139-6.png" srcset="/img/loading.gif" lazyload alt="image-20240405092603705-1716974523139-6"></p>
+<figure>
+<img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405092603705-1716974523139-6.png" srcset="/img/loading.gif" lazyload alt="image-20240405092603705-1716974523139-6">
+<figcaption aria-hidden="true">image-20240405092603705-1716974523139-6</figcaption>
+</figure>
 <p>每个规划周期内，找到车在导航路径中的投影点，以投影点为坐标原点，往后取30米，往前取150米范围内的点，做平滑，平滑后的点的集合成为参考线。</p>
-<h2 id="参考线平滑算法"><a href="#参考线平滑算法" class="headerlink" title="参考线平滑算法"></a>参考线平滑算法</h2><p><strong>平滑性因素</strong></p>
-<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405093102300.png" srcset="/img/loading.gif" lazyload alt="image-20240405093102300"></p>
-<p>$|\overrightarrow{P_{1}P_{3}}|$：衡量平滑与不平滑的标准，$|\overrightarrow{P_{1}P_{3}}|$越小越平滑。缺点：虽然平滑了，但是几何形状差距大。</p>
+<h2 id="参考线平滑算法">参考线平滑算法</h2>
+<p><strong>平滑性因素</strong></p>
+<figure>
+<img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405093102300.png" srcset="/img/loading.gif" lazyload alt="image-20240405093102300">
+<figcaption aria-hidden="true">image-20240405093102300</figcaption>
+</figure>
+<p><span class="math inline">\(|\overrightarrow{P_{1}P_{3}}|\)</span>：衡量平滑与不平滑的标准，<span class="math inline">\(|\overrightarrow{P_{1}P_{3}}|\)</span>越小越平滑。缺点：虽然平滑了，但是几何形状差距大。</p>
 <p><strong>道路几何因素</strong></p>
-<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405093701578.png" srcset="/img/loading.gif" lazyload alt="image-20240405093701578"></p>
-<p>$|\overrightarrow{P_{1}P_{1r}}|+|\overrightarrow{P_{2}P_{2r}}|+|\overrightarrow{P_{3}P_{3r}}|$越小，越接近原几何路径。</p>
+<figure>
+<img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405093701578.png" srcset="/img/loading.gif" lazyload alt="image-20240405093701578">
+<figcaption aria-hidden="true">image-20240405093701578</figcaption>
+</figure>
+<p><span class="math inline">\(|\overrightarrow{P_{1}P_{1r}}|+|\overrightarrow{P_{2}P_{2r}}|+|\overrightarrow{P_{3}P_{3r}}|\)</span>越小，越接近原几何路径。</p>
 <p><strong>长度要尽可能均匀和紧凑</strong></p>
-<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405141613878.png" srcset="/img/loading.gif" lazyload alt="image-20240405141613878"></p>
-<p>$|\overrightarrow{P_{1}P_{2}}|^2+|\overrightarrow{P_{1}P_{3}}|^2$越小，越均匀，紧凑。</p>
-<h3 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h3><p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405173124418.png" srcset="/img/loading.gif" lazyload alt="image-20240405173124418"></p>
-<p>已知：$x_{1r}…x_{3r},y_{1r}…y_{3r}$</p>
-<p>未知：$x_{1}…x_{3},y_{1}…y_{3}$</p>
+<figure>
+<img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405141613878.png" srcset="/img/loading.gif" lazyload alt="image-20240405141613878">
+<figcaption aria-hidden="true">image-20240405141613878</figcaption>
+</figure>
+<p><span class="math inline">\(|\overrightarrow{P_{1}P_{2}}|^2+|\overrightarrow{P_{1}P_{3}}|^2\)</span>越小，越均匀，紧凑。</p>
+<h3 id="代价函数">代价函数</h3>
+<figure>
+<img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405173124418.png" srcset="/img/loading.gif" lazyload alt="image-20240405173124418">
+<figcaption aria-hidden="true">image-20240405173124418</figcaption>
+</figure>
+<p>已知：<span class="math inline">\(x_{1r}...x_{3r},y_{1r}...y_{3r}\)</span></p>
+<p>未知：<span class="math inline">\(x_{1}...x_{3},y_{1}...y_{3}\)</span></p>
 <p>代价函数：</p>
-<p>$$cost function &#x3D; \ w_{1}{\sum_{i&#x3D;1}^3(x_i-x_{ir})^2+(y_i-y_{ir})^2}+\w_2{(x_1+x_3-2x_2)^2+(y_1+y_3-2y_2)^2}+\w_3{\sum_{i&#x3D;1}^2(x_{i+1}-x_i)^2+(y_{i+1}-y_i)^2}$$</p>
+<p><span class="math display">\[cost function = \\
+w_{1}\{\sum_{i=1}^3(x_i-x_{ir})^2+(y_i-y_{ir})^2\}+\\w_2\{(x_1+x_3-2x_2)^2+(y_1+y_3-2y_2)^2\}+\\w_3\{\sum_{i=1}^2(x_{i+1}-x_i)^2+(y_{i+1}-y_i)^2\}\]</span></p>
 <blockquote>
 <p>①与原路径点相似的代价，②平滑代价，③紧凑代价</p>
 </blockquote>
 <p><strong>平滑代价：</strong></p>
-<p>​	$W_{cost_smooth}\cdot x^TA^T_1A_1x\ ,A_1size&#x3D;(2n,2n-4)$</p>
+<p>​ <span class="math inline">\(W_{cost\_smooth}\cdot x^TA^T_1A_1x\
+,A_1size=(2n,2n-4)\)</span></p>
 <p><strong>紧凑代价：</strong></p>
-<p>​	$W_{cost_length}\cdot x^TA^T_2A_2x\ ,A_2size&#x3D;(2n,2n-2)$</p>
+<p>​ <span class="math inline">\(W_{cost\_length}\cdot x^TA^T_2A_2x\
+,A_2size=(2n,2n-2)\)</span></p>
 <p><strong>几何相似代价：</strong></p>
-<p>​	$W_{cost_ref}\cdot x^TA_3^TA_3x+f^Tx$</p>
+<p>​ <span class="math inline">\(W_{cost\_ref}\cdot
+x^TA_3^TA_3x+f^Tx\)</span></p>
 <blockquote>
-<p>$\sum_{i&#x3D;1}^n(x_{ir}-y_{ir})^2$是个常数，可以忽略。</p>
+<p><span class="math inline">\(\sum_{i=1}^n(x_{ir}-y_{ir})^2\)</span>是个常数，可以忽略。</p>
 </blockquote>
-<h3 id="二次规划问题"><a href="#二次规划问题" class="headerlink" title="二次规划问题"></a>二次规划问题</h3><p>二次规划问题的目标函数是变量的二次函数，而约束条件可以是线性的，一般形式如下：</p>
-<p>$$Minimize: \dfrac{1}{2}x^TQx+c^Tx$$</p>
-<p>$$Subject\ to: Ax\leq b ,Ex &#x3D; d$$</p>
+<h3 id="二次规划问题">二次规划问题</h3>
+<p>二次规划问题的目标函数是变量的二次函数，而约束条件可以是线性的，一般形式如下：</p>
+<p><span class="math display">\[Minimize:
+\dfrac{1}{2}x^TQx+c^Tx\]</span></p>
+<p><span class="math display">\[Subject\ to: Ax\leq b ,Ex =
+d\]</span></p>
 <p>其中：</p>
 <ul>
-<li>$x$是一个$n$维向量，表示决策变量</li>
-<li>$Q$是一个$n\times n$的对称矩阵，表示目标函数中变量的二次项系数</li>
-<li>$c$是一个$n$维向量，表示目标函数中变量的一次项系数</li>
-<li>$A$是一个$m\times n$的矩阵，$b$是一个$m$维向量，定义了$m$个线性不等式约束</li>
-<li>$E$是一个$p\times n$的矩阵，$d$是一个$p$维向量，定义了$p$个线性等式约束</li>
+<li><span class="math inline">\(x\)</span>是一个<span class="math inline">\(n\)</span>维向量，表示决策变量</li>
+<li><span class="math inline">\(Q\)</span>是一个<span class="math inline">\(n\times
+n\)</span>的对称矩阵，表示目标函数中变量的二次项系数</li>
+<li><span class="math inline">\(c\)</span>是一个<span class="math inline">\(n\)</span>维向量，表示目标函数中变量的一次项系数</li>
+<li><span class="math inline">\(A\)</span>是一个<span class="math inline">\(m\times n\)</span>的矩阵，<span class="math inline">\(b\)</span>是一个<span class="math inline">\(m\)</span>维向量，定义了<span class="math inline">\(m\)</span>个线性不等式约束</li>
+<li><span class="math inline">\(E\)</span>是一个<span class="math inline">\(p\times n\)</span>的矩阵，<span class="math inline">\(d\)</span>是一个<span class="math inline">\(p\)</span>维向量，定义了<span class="math inline">\(p\)</span>个线性等式约束</li>
 </ul>
-<h4 id="针对参考线"><a href="#针对参考线" class="headerlink" title="针对参考线"></a>针对参考线</h4><p><strong>二次规划：</strong></p>
-<p>​	$&#x3D;\dfrac{1}{2}x^THx+f^Tx$</p>
-<p>​	$&#x3D; x^T\dfrac{H}{2}x+f^Tx$</p>
-<p>此处：$H&#x3D;2(W_{smooth}A^T_1A_1+W_{length}A^T_2A_2+W_{ref}A^T_3A_3)$</p>
+<h4 id="针对参考线">针对参考线</h4>
+<p><strong>二次规划：</strong></p>
+<p>​ <span class="math inline">\(=\dfrac{1}{2}x^THx+f^Tx\)</span></p>
+<p>​ <span class="math inline">\(= x^T\dfrac{H}{2}x+f^Tx\)</span></p>
+<p>此处：<span class="math inline">\(H=2(W_{smooth}A^T_1A_1+W_{length}A^T_2A_2+W_{ref}A^T_3A_3)\)</span></p>
 <p><strong>约束：</strong></p>
-<p>​	$x$与$x_{ref}$不要离太远，$|x-x_{ref}|\leq buff$</p>
+<p>​ <span class="math inline">\(x\)</span>与<span class="math inline">\(x_{ref}\)</span>不要离太远，<span class="math inline">\(|x-x_{ref}|\leq buff\)</span></p>
 <p><strong>曲率约束：</strong></p>
-<p>​	曲率约束是一种非线性约束，一般与车的最大侧向加速度有关(有些弯过不去)，放到后面考虑。</p>
-<h2 id="Fem-smoother平滑算法"><a href="#Fem-smoother平滑算法" class="headerlink" title="Fem smoother平滑算法"></a>Fem smoother平滑算法</h2><p>优点：优化变量较少</p>
+<p>​
+曲率约束是一种非线性约束，一般与车的最大侧向加速度有关(有些弯过不去)，放到后面考虑。</p>
+<h2 id="fem-smoother平滑算法">Fem smoother平滑算法</h2>
+<p>优点：优化变量较少</p>
 <p>缺点：无法保证曲率是连续的，添加曲率约束求解比较麻烦</p>
 <p>参考线是决策规划的基础和前提，必须要快，采用方案如下：</p>
-<ol>
+<ol type="1">
 <li>减少规划频率，规划算法每100ms执行一次，控制算法每10ms执行一次</li>
 <li>充分利用上个周期计算的结果</li>
 </ol>
-<h3 id="找匹配点"><a href="#找匹配点" class="headerlink" title="找匹配点"></a>找匹配点</h3><p><strong>普通算法：</strong>每一个规划周期计算一遍，太慢，导航路径很可能很长，遍历费时</p>
+<h3 id="找匹配点">找匹配点</h3>
+<p><strong>普通算法：</strong>每一个规划周期计算一遍，太慢，导航路径很可能很长，遍历费时</p>
 <p><strong>改进算法：</strong></p>
-<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405233336252.png" srcset="/img/loading.gif" lazyload alt="image-20240405233336252"></p>
-<p>以上个周期的 match point 为起点做遍历，一旦有$l_{i+1}&gt;l_i$，立刻退出遍历，$l_i$对应的点作为本周期的匹配点</p>
+<figure>
+<img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405233336252.png" srcset="/img/loading.gif" lazyload alt="image-20240405233336252">
+<figcaption aria-hidden="true">image-20240405233336252</figcaption>
+</figure>
+<p>以上个周期的 match point 为起点做遍历，一旦有<span class="math inline">\(l_{i+1}&gt;l_i\)</span>，立刻退出遍历，<span class="math inline">\(l_i\)</span>对应的点作为本周期的匹配点</p>
 <p><strong>找匹配点的方向：</strong></p>
-<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405233810840.png" srcset="/img/loading.gif" lazyload alt="image-20240405233810840"></p>
+<figure>
+<img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405233810840.png" srcset="/img/loading.gif" lazyload alt="image-20240405233810840">
+<figcaption aria-hidden="true">image-20240405233810840</figcaption>
+</figure>
 <p>如果车往前，就往前遍历，如果车往后，就往后遍历：</p>
-<p>​	$\overrightarrow{d} \cdot \overrightarrow{\tau}&gt;0$：向前遍历</p>
-<p>​	$\overrightarrow{d} \cdot \overrightarrow{\tau}&lt;0$：向后遍历</p>
-<p>​	$|\overrightarrow{d} \cdot \overrightarrow{\tau}|&lt;10^{-3}$：本周期的match point 等于上个周期的match point	</p>
+<p>​ <span class="math inline">\(\overrightarrow{d} \cdot
+\overrightarrow{\tau}&gt;0\)</span>：向前遍历</p>
+<p>​ <span class="math inline">\(\overrightarrow{d} \cdot
+\overrightarrow{\tau}&lt;0\)</span>：向后遍历</p>
+<p>​ <span class="math inline">\(|\overrightarrow{d} \cdot
+\overrightarrow{\tau}|&lt;10^{-3}\)</span>：本周期的match point
+等于上个周期的match point</p>
 <blockquote>
 <p>本质有点像梯度下降</p>
 </blockquote>
 <p>此方法可以大大加速找匹配点的算法，但只适用于在上个匹配点结果附近只有一个极小值点。</p>
-<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405235016854.png" srcset="/img/loading.gif" lazyload alt="image-20240405235016854"></p>
-<p>但是这种问题一般情况下不会出现，因为规划周期是100ms，即使以50m&#x2F;s的速度运动，车也只走了5m，5m内道路不太可能出现这么扭曲的几何，一般在上个规划周期的匹配点上只有一个极值点。</p>
+<figure>
+<img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405235016854.png" srcset="/img/loading.gif" lazyload alt="image-20240405235016854">
+<figcaption aria-hidden="true">image-20240405235016854</figcaption>
+</figure>
+<p>但是这种问题一般情况下不会出现，因为规划周期是100ms，即使以50m/s的速度运动，车也只走了5m，5m内道路不太可能出现这么扭曲的几何，一般在上个规划周期的匹配点上只有一个极值点。</p>
 <p>万一真的出现这种情况：</p>
-<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405235345495.png" srcset="/img/loading.gif" lazyload alt="image-20240405235345495"></p>
-<p>使用 increase_count 变量记录$l$增加的次数</p>
-<p>if	 $l_{i+1}&lt;l_i$	($l$在减小)</p>
-<p>​	increase_count &#x3D; 0</p>
-<p>if	$l_{i-1}&lt;l_i$ 且  $l_{i+1}&gt;l_i$	(找到 $l_{i}$ 为极小值)</p>
-<p>​	存储 $l_{i}$ </p>
-<p>if	$l_{i+1}&gt;l_i$	($l$在减大)</p>
-<p>​	increase_count++</p>
-<p>if	increase_count &gt; 10	(意味着检查了10个点都没发现另外的极小值点)</p>
-<p>​	break</p>
-<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240406000309848.png" srcset="/img/loading.gif" lazyload alt="image-20240406000309848"></p>
+<figure>
+<img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240405235345495.png" srcset="/img/loading.gif" lazyload alt="image-20240405235345495">
+<figcaption aria-hidden="true">image-20240405235345495</figcaption>
+</figure>
+<p>使用 increase_count 变量记录<span class="math inline">\(l\)</span>增加的次数</p>
+<p>if <span class="math inline">\(l_{i+1}&lt;l_i\)</span> (<span class="math inline">\(l\)</span>在减小)</p>
+<p>​ increase_count = 0</p>
+<p>if <span class="math inline">\(l_{i-1}&lt;l_i\)</span> 且 <span class="math inline">\(l_{i+1}&gt;l_i\)</span> (找到 <span class="math inline">\(l_{i}\)</span> 为极小值)</p>
+<p>​ 存储 <span class="math inline">\(l_{i}\)</span></p>
+<p>if <span class="math inline">\(l_{i+1}&gt;l_i\)</span> (<span class="math inline">\(l\)</span>在减大)</p>
+<p>​ increase_count++</p>
+<p>if increase_count &gt; 10
+(意味着检查了10个点都没发现另外的极小值点)</p>
+<p>​ break</p>
+<figure>
+<img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240406000309848.png" srcset="/img/loading.gif" lazyload alt="image-20240406000309848">
+<figcaption aria-hidden="true">image-20240406000309848</figcaption>
+</figure>
 <p>第一次运行判断increase_count大于50个点，不是第一次运行则判断大于3个点</p>
 <p><strong>处理点不够的情况：</strong></p>
 <p>如果后面没有30m或者前面没有150m</p>
 <p>解决办法：保持总长度不变(30+150)，(10+170)，(80+100)</p>
 <p><strong>轨迹拼接：</strong></p>
-<p><img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240406122706205.png" srcset="/img/loading.gif" lazyload alt="image-20240406122706205"></p>
+<figure>
+<img src="/2024/05/29/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%92%EF%BC%9A%E5%8F%82%E8%80%83%E7%BA%BF%E6%A8%A1%E5%9D%97/image-20240406122706205.png" srcset="/img/loading.gif" lazyload alt="image-20240406122706205">
+<figcaption aria-hidden="true">image-20240406122706205</figcaption>
+</figure>
 <p>每100ms周期平滑的轨迹优大量重复的点，我们只需要将上一个规划周期和多出来的平滑轨迹拼接起来就可以</p>
 <p>具体做法，将本周期和上个周期的参考线作比较，如果一模一样就用上个周期的平滑轨迹。若不一样，计算需要拼接多少个点记为n，</p>
 <p>Fem Smoother 至少需要3个点才能够使用</p>
@@ -554,6 +604,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -747,6 +803,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
